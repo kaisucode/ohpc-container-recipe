@@ -10,8 +10,16 @@ This is a container recipe for [NVIDIA's HPC container maker](https://github.com
 #### Docker
 
 ```bash
-hpccm.py --recipe recipes/ohpc.py > Dockerfile
+hpccm --recipe recipes/ohpc-recipe.py --format docker > Dockerfile
 docker build -t ohpc-recipe -f Dockerfile .
 docker run -v $PWD/python_scripts/:/mnt/python_scripts/ -it --rm ohpc-recipe python3.7 /mnt/python_scripts/test.py
+```
+
+#### Singularity
+
+```bash
+hpccm --recipe recipes/ohpc-recipe.py --format singularity > Singularity.def
+singularity build ohpc-recipe.simg Singularity.def
+singularity exec --nv ohpc-recipe.simg python3.7 $PWD/python_scripts/benchmark.py
 ```
 

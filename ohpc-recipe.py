@@ -1,7 +1,7 @@
 """OpenHPC container
 
 Sample workflow:
-$ hpccm.py --recipe recipes/ohpc.py > Dockerfile
+$ hpccm.py --recipe recipes/ohpc.py --format docker > Dockerfile
 $ docker build -t ohpc-recipe -f Dockerfile .
 $ docker run -v $PWD/python_scripts/:/mnt/python_scripts/ -it --rm ohpc-recipe python3.7 /mnt/python_scripts/benchmark.py
 """
