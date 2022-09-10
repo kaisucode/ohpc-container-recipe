@@ -48,6 +48,10 @@ Note: For singularity builds, root access is required. If you are on MacOS or Wi
 ```bash
 hpccm --recipe ohpc-recipe.py --format singularity > Singularity.def
 sudo singularity build ohpc-recipe.simg Singularity.def
-singularity exec --nv ohpc-recipe.simg python3.7 $PWD/python_scripts/benchmark.py
+singularity exec --nv ohpc-recipe.simg python3 $PWD/python_scripts/benchmark.py
 ```
+
+An alternate solution is to build using Docker, then rebuild as singularity
+`singularity build ohpc-recipe.simg docker://kevinhsuk/ohpc-recipe`
+
 
