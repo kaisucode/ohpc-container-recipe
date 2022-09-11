@@ -22,8 +22,11 @@ Stage0 += shell(commands=['yum update -y',
 #  Stage0 += packages(epel=True,
 #                     yum=['wget', 'python38'])
 
-Stage0 += conda(eula=True, 
+Stage1 += conda(eula=True, 
         packages=['keras==2.6.0', 'tensorflow==2.6.0'])
+
+
+Stage1 += runscript(commands=['/usr/local/anaconda/bin/activate'])
 
 # Install Python 3.7
 #  Stage1 += shell(commands=['cd /tmp/', 

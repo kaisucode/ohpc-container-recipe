@@ -39,4 +39,5 @@ From: quay.io/ohpc/ohpc-gnu9
     /usr/local/anaconda/bin/conda clean -afy
     rm -rf /var/tmp/Miniconda3-py38_4.8.3-Linux-x86_64.sh
 
-
+%runscript
+    exec /usr/local/anaconda/bin/activate "$@"
