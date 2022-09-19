@@ -7,6 +7,9 @@
 `singularity exec ohpc-recipe4.simg python /benchmark.py`
 
 
+note: scale down the memory usage in `Vagrantfile` if your system can't support the specified amount (4096)
+
+
 This is a container recipe for [NVIDIA's HPC container maker](https://github.com/NVIDIA/hpc-container-maker). The base image is [OpenHPC's development environment](https://quay.io/repository/ohpc/ohpc-gnu9), with added Python, TensorFlow, and Keras support
 
 
