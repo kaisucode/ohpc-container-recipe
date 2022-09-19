@@ -26,14 +26,23 @@ Stage1 += conda(eula=True,
         packages=['keras==2.6.0', 'tensorflow==2.6.0'])
 
 
-#  Stage1 += runscript(commands=['/usr/local/anaconda/bin/activate'])
-    #  'echo "#!/bin/bash\\nsource /usr/local/anaconda/bin/activate {}\\n > /usr/local/bin/entrypoint.sh'.format('base'),
+Stage0 += environment(variables={'PATH': '/usr/local/anaconda/bin:$PATH'})
 
-Stage1 += hpccm.primitives.shell(commands=[
-    'echo "#!/bin/bash \n source /usr/local/anaconda/bin/activate" > /usr/local/bin/entrypoint.sh',
-    'chmod a+x /usr/local/bin/entrypoint.sh'])
-Stage1 += hpccm.primitives.runscript(
-        commands=['/usr/local/bin/entrypoint.sh'])
+Stage0 += copy(src='python_scripts/benchmark.py', dest='benchmark.py')
+#  Stage0 += shell(commands=[
+#      'mpicc -o /usr/local/bin/mpi_bandwidth /var/tmp/mpi_bandwidth.c'])
+
+
+
+
+#  def sourceEnvRunscript(): 
+    #  Stage1 += runscript(commands=['/usr/local/anaconda/bin/activate'])
+    #      'echo "#!/bin/bash\\nsource /usr/local/anaconda/bin/activate {}\\n > /usr/local/bin/entrypoint.sh'.format('base'),
+    #  Stage1 += hpccm.primitives.shell(commands=[
+    #      'echo "#!/bin/bash \n source /usr/local/anaconda/bin/activate" > /usr/local/bin/entrypoint.sh',
+    #      'chmod a+x /usr/local/bin/entrypoint.sh'])
+    #  Stage1 += hpccm.primitives.runscript(
+    #          commands=['/usr/local/bin/entrypoint.sh'])
 
 # Install Python 3.7
 #  Stage1 += shell(commands=['cd /tmp/', 

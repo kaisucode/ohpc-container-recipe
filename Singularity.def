@@ -21,6 +21,14 @@ From: quay.io/ohpc/ohpc-gnu9
     yum update -y
     rm -rf /var/cache/yum/*
 
+%environment
+    export PATH=/usr/local/anaconda/bin:$PATH
+%post
+    export PATH=/usr/local/anaconda/bin:$PATH
+
+%files
+    python_scripts/benchmark.py benchmark.py
+
 # Anaconda
 %post
     yum install -y \
@@ -38,6 +46,3 @@ From: quay.io/ohpc/ohpc-gnu9
     conda install -y keras==2.6.0 tensorflow==2.6.0
     /usr/local/anaconda/bin/conda clean -afy
     rm -rf /var/tmp/Miniconda3-py38_4.8.3-Linux-x86_64.sh
-
-%runscript
-    exec /usr/local/anaconda/bin/activate "$@"

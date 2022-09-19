@@ -1,6 +1,12 @@
 
 ## OpenHPC Container Recipe
 
+
+
+
+`singularity exec ohpc-recipe4.simg python /benchmark.py`
+
+
 This is a container recipe for [NVIDIA's HPC container maker](https://github.com/NVIDIA/hpc-container-maker). The base image is [OpenHPC's development environment](https://quay.io/repository/ohpc/ohpc-gnu9), with added Python, TensorFlow, and Keras support
 
 
@@ -44,6 +50,12 @@ docker run -v $PWD/python_scripts/:/mnt/python_scripts/ -it --rm ohpc-recipe pyt
 #### Singularity
 
 Note: For singularity builds, root access is required. If you are on MacOS or Windows, please check out the instructions [here](https://docs.sylabs.io/guides/3.0/user-guide/installation.html#mac) on how to use Vagrant to build a Singularity virtual machine
+
+
+
+hpccm --recipe ohpc-recipe.py --singularity-version=3.8 --format singularity > Singularity.def
+version 3.8 for multistage
+
 
 ```bash
 hpccm --recipe ohpc-recipe.py --format singularity > Singularity.def
