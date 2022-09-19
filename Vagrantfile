@@ -16,6 +16,12 @@ Vagrant.configure("2") do |config|
   config.vm.box = "sylabs/singularity-ce-3.8-centos-7-64"
   config.vm.box_version = "20210527.0.0"
 
+  config.vm.provider "virtualbox" do |vb|
+    # Customize the amount of memory on the VM:
+    vb.memory = "4096"
+  end
+
+  #
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
