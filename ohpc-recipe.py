@@ -22,13 +22,19 @@ Stage0 += shell(commands=['yum update -y',
 #  Stage0 += packages(epel=True,
 #                     yum=['wget', 'python38'])
 
-Stage1 += conda(eula=True, 
-        packages=['keras==2.6.0', 'tensorflow==2.6.0'])
+Stage0 += conda(eula=True, 
+        packages=['keras', 'tensorflow-gpu==2.4.1'])
+        #  packages=['keras==2.6.0', 'tensorflow-gpu==2.6.0'])
+## needs to be `tensorflow-gpu` instead of `tensorflow`, so that conda will also install cudatoolkit and cudnn
 
 
-Stage0 += environment(variables={'PATH': '/usr/local/anaconda/bin:$PATH'})
+Stage0 += environment(variables={
+    'PATH': '/usr/local/anaconda/bin:$PATH', 
+    'LD_LIBRARY_PATH': '$LD_LIBRARY_PATH:/usr/local/anaconda/lib'
+    })
 
-Stage0 += copy(src='python_scripts/benchmark.py', dest='benchmark.py')
+# for vagrant testing without bind point
+Stage0 += copy(src='python_scripts/benchmark.py', dest='benchmark_cpy.py')
 #  Stage0 += shell(commands=[
 #      'mpicc -o /usr/local/bin/mpi_bandwidth /var/tmp/mpi_bandwidth.c'])
 
