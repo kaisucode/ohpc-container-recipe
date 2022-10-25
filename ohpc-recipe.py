@@ -22,8 +22,8 @@ Stage0 += shell(commands=['yum update -y',
 #  Stage0 += packages(epel=True,
 #                     yum=['wget', 'python38'])
 
-Stage0 += conda(eula=True, 
-        packages=['keras', 'tensorflow-gpu==2.4.1'])
+Stage0 += conda(eula=True, channels=['nvidia'], 
+        packages=['keras', 'tensorflow-gpu==2.4.1', 'cudatoolkit', 'cudnn'])
         #  packages=['keras==2.6.0', 'tensorflow-gpu==2.6.0'])
 ## needs to be `tensorflow-gpu` instead of `tensorflow`, so that conda will also install cudatoolkit and cudnn
 
