@@ -22,16 +22,19 @@ Stage0 += shell(commands=['yum update -y',
 #  Stage0 += packages(epel=True,
 #                     yum=['wget', 'python38'])
 
-Stage0 += conda(eula=True, channels=['nvidia'], 
-        packages=['keras', 'tensorflow-gpu==2.4.1', 'cudatoolkit', 'cudnn'])
+Stage0 += environment(variables={
+    'CONDA_CUDA_OVERRIDE': "11.2",
+    'PATH': '/usr/local/anaconda/bin:$PATH', 
+    'LD_LIBRARY_PATH': '$LD_LIBRARY_PATH:/usr/local/anaconda/lib'
+    })
+
+Stage0 += conda(eula=True, channels=['conda-forge'], 
+        #  packages=['tensorflow-gpu==2.6.0', 'cudatoolkit==11.2', 'cudnn'])
+        packages=['tensorflow-gpu==2.6.0'])
         #  packages=['keras==2.6.0', 'tensorflow-gpu==2.6.0'])
 ## needs to be `tensorflow-gpu` instead of `tensorflow`, so that conda will also install cudatoolkit and cudnn
 
 
-Stage0 += environment(variables={
-    'PATH': '/usr/local/anaconda/bin:$PATH', 
-    'LD_LIBRARY_PATH': '$LD_LIBRARY_PATH:/usr/local/anaconda/lib'
-    })
 
 # for vagrant testing without bind point
 Stage0 += copy(src='python_scripts/benchmark.py', dest='benchmark_cpy.py')
